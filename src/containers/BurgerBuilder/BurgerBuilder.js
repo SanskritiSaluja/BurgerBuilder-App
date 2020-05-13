@@ -84,7 +84,7 @@ class BurgerBuilder extends Component {
          this.updatePurchaseable(updatedIngredients);
     }
 
-    purchaseHandler = ()=>{
+    purchaseHandler = () => {
         this.setState( {
             purchasing: true
         })
@@ -100,42 +100,14 @@ class BurgerBuilder extends Component {
     }
 
     ContinuePurchaseHandler = () => {
-        // this.setState({
-        //     loading : true
-        // })
-        // const order = {
-        //     ingredients  : this.state.ingredients,
-        //     totalPrice : this.state.totalPrice,
-        //     customer : {
-        //         name : 'Sanskriti Saluja',
-        //         address : {
-        //             street : 'Test',
-        //             zipCode : '123',
-        //             country : 'India'
-        //         },
-        //         email : 'test@test.com'
-        //     },
-        //     deliveryMethod : 'fastest'
-        // }
-        // axios.post("/orders.json",order).then(response => {
-        //     this.setState({
-        //         loading :false ,
-        //         purchasing : false
-
-        //     })
-        // }).catch(error => {
-        //     this.setState({
-        //         loading :false ,
-        //         purchasing : false
-        //      })
-        // })
-
         const queryParams = [];
         for(let i in this.state.ingredients) {
            queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]));
 
         } 
+        queryParams.push("price=" + this.state.totalPrice)
         const queryString =queryParams.join('&');
+
         this.props.history.push( {
            pathname :  '/checkout' ,
            search :  '?'+queryString });
@@ -143,7 +115,7 @@ class BurgerBuilder extends Component {
 
     
     render() { 
-        let disabledInfo ={ ... this.state.ingredients };
+        let disabledInfo ={ ...this.state.ingredients };
         for(let key in disabledInfo )
         {
             disabledInfo[key] = disabledInfo[key]<=0;
