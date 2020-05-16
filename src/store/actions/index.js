@@ -4,3 +4,8 @@ export {addIngredient,
 export {purchaseBurger,
           purchaseInit,
           fetchOrders} from './order'
+export {
+    auth,
+    authLogout
+
+} from './auth';
