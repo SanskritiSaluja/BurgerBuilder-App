@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes'
 const InitialSate = {
     ingredients : null,
      totalPrice : 4,
-     error :false
+     error :false,
+     building : false
 }
 const INGREDIENT_PRICES = {
     salad : 0.5 ,
@@ -23,7 +24,8 @@ const reducer = (state = InitialSate, action) => {
                 ...state.ingredients,
             [action.ingredientName] : state.ingredients[action.ingredientName] + 1
            },
-            totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+            totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+            building :true
     }
 
         case actionTypes.REMOVE_INGREDIENT : return {
@@ -32,7 +34,8 @@ const reducer = (state = InitialSate, action) => {
                 ...state.ingredients,
             [action.ingredientName] : state.ingredients[action.ingredientName] - 1
         },
-        totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+        totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+        building :true
         }
 
         case actionTypes.SET_INGREDIENTS :    
@@ -45,7 +48,8 @@ const reducer = (state = InitialSate, action) => {
                         meat : action.ingredients.meat
                     },
                     totalPrice : 4,
-                    error : false
+                    error : false,
+                    building:false
                 };
         case actionTypes.FETCH_INGREDIENTS_FAILED : 
                   return {

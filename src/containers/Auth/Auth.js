@@ -5,6 +5,7 @@ import './Auth.css'
 import * as action from '../../store/actions/index'
 import {connect} from 'react-redux'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import {Redirect} from 'react-router-dom'
 
 
 class Auth extends Component {
@@ -87,6 +88,12 @@ class Auth extends Component {
         })
     }
 
+    componentDidMount () {
+        if(!this.props.burgerBuilding && this.props.authRedirectPath !=="/")
+             this.props.onSetRedirectPath()
+        
+    }
+
            
     render() { 
         let formElementsArray = [];
@@ -115,10 +122,15 @@ class Auth extends Component {
           {
           errorMessage = <p>{this.props.error.message}</p>
           }
+         
+          let authRedirect = null
+          if(this.props.isAuthenticated) 
+            authRedirect = <Redirect to = {this.props.authRedirectPath} />
 
         return (
             <div className = "Auth">
                 {errorMessage}
+                {authRedirect}
                 <form onSubmit= {this.submitHandler}>
                   {form}
                   <Button btnType = "Success">SUBMIT</Button>
@@ -132,13 +144,17 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading  : state.auth.loading,
-        error  : state.auth.error
+        error  : state.auth.error,
+        isAuthenticated : state.auth.token !==null,
+        burgerBuilding : state.burgerBuilder.building,
+        authRedirectPath : state.auth.authRedirectPath
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        OnAuth : (email,password,isSignup) => (dispatch(action.auth(email,password,isSignup)))
+        OnAuth : (email,password,isSignup) => (dispatch(action.auth(email,password,isSignup))),
+        onSetRedirectPath : () => (dispatch(action.setAuthRedirectPath("/")))
     }
 }
  
