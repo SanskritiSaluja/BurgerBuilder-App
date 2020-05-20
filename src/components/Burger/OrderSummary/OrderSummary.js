@@ -5,13 +5,9 @@ import './OrderSummary.css'
 import Button from './../../UI/Button/Button'
 
 
-class  OrderSummary extends Component {
-  componentWillUpdate() {
-  }
-
-render (){
-    const items= Object.keys(this.props.ingredients).map((igKey) => {
-        return (<li key = {igKey + this.props.ingredients[igKey]}><span className = "Item">{igKey}</span> : {this.props.ingredients[igKey]}</li>);
+const  OrderSummary = props => {
+    const items= Object.keys(props.ingredients).map((igKey) => {
+        return (<li key = {igKey + props.ingredients[igKey]}><span className = "Item">{igKey}</span> : {props.ingredients[igKey]}</li>);
         })
        
        
@@ -22,14 +18,12 @@ render (){
             <ul>
              {items}
              </ul>
-           <p><strong>Total Price: {this.props.totalPrice.toFixed(2)} </strong></p>
+           <p><strong>Total Price: {props.totalPrice.toFixed(2)} </strong></p>
             <p>Continue to checkout?</p>
-            <Button btnType="Danger" clicked= {this.props.purchaseCancelled}>CANCEL</Button>
-            <Button btnType ="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button>
+            <Button btnType="Danger" clicked= {props.purchaseCancelled}>CANCEL</Button>
+            <Button btnType ="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
         </Aux>
     );
  }
         
-}
-
 export default OrderSummary;

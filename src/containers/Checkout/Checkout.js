@@ -6,32 +6,31 @@ import {connect} from 'react-redux'
 
 
 
-class Checkout extends Component {
+const Checkout = props =>  {
      
-     checkoutCancelledHandler = () => {
-         this.props.history.goBack();
+    const checkoutCancelledHandler = () => {
+         props.history.goBack();
 
      }
 
-     checkoutContinuedHandler = () => {
-          this.props.history.replace('/checkout/contact-data')
+    const checkoutContinuedHandler = () => {
+          props.history.replace('/checkout/contact-data')
      }
     
   
-    render() { 
-        let summary = <Redirect to="/" />
+    let summary = <Redirect to="/" />
 
-        if(this.props.ingredients)
+    if(props.ingredients)
         {
-            const purchasedRedirect = this.props.purchased ? <Redirect to= "/" /> : null
+            const purchasedRedirect = props.purchased ? <Redirect to= "/" /> : null
         summary = ( <div>
             {purchasedRedirect}
-        <CheckoutSummary ingredients = {this.props.ingredients}
-            checkoutCancelled = { this.checkoutCancelledHandler}
-            checkoutContinued = {this.checkoutContinuedHandler} />
+        <CheckoutSummary ingredients = {props.ingredients}
+            checkoutCancelled = { checkoutCancelledHandler}
+            checkoutContinued = {checkoutContinuedHandler} />
 
             <Route 
-            path = {this.props.match.path + '/contact-data'}
+            path = {props.match.path + '/contact-data'}
             component = {ContactData}/>
         </div>)
         }
@@ -39,7 +38,6 @@ class Checkout extends Component {
 
         return summary;
     }
-}
 
 const mapStatetoProps = state => {
     return {
