@@ -1,12 +1,14 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import * as  actionTypes from '../../../store/actions/index'
 import {Redirect} from 'react-router-dom'
 
 const Logout = props => {
+    const {onLogout} =props
+
     useEffect(() => {
-        props.onLogout();
-    },[])
+        onLogout();
+    },[onLogout])
     
         return ( <Redirect to="/"/> );
     }

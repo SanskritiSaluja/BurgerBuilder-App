@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
@@ -8,9 +8,11 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 
 const Orders = props => {
 
+     const {onInitOrders , token ,userId} =props
+
     useEffect( () => {
-       props.onInitOrders(props.token,props.userId)
-    },[])
+       onInitOrders(token,userId)
+    },[onInitOrders,token,userId])
 
    
       let orders =  <Spinner/>

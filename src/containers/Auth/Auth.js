@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import './Auth.css'
@@ -78,11 +78,13 @@ const Auth = props =>  {
     const switchAuthModeHandler = () => {
         setIsSignup(!isSignup)
     }
+    
+    const {burgerBuilding,authRedirectPath,onSetRedirectPath} =props
 
     useEffect(() => {
-        if(!props.burgerBuilding && props.authRedirectPath !=="/")
-             props.onSetRedirectPath()
-       } , [])
+        if(!burgerBuilding && authRedirectPath !=="/")
+             onSetRedirectPath()
+       } , [burgerBuilding,authRedirectPath,onSetRedirectPath])
 
            
         let formElementsArray = [];

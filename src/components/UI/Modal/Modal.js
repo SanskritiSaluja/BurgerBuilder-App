@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Modal.css';
 import Aux from '../../../hoc/Aux/Aux'
 import BackDrop from '../BackDrop/BackDrop'  

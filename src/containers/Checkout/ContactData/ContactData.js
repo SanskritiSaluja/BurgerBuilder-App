@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import Button from "../../../components/UI/Button/Button"
 import './ContactData.css'
 import axios from '../../../axios-orders'
